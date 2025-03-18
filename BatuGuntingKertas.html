@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boolans Batu Gunting Kertas</title>
+    <style>
+      body {
+        background-color: #000;
+      }
+      .container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      button {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        height: auto;
+        padding: 10px;
+        align-items: center;
+        background-color: #ffffff;
+        border: 3px solid #333;
+        justify-content: center;
+        transition: background-color 0.3s ease;
+        border-radius: 100px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #ddd;
+      }
+
+      button img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+      p {
+        display: flex;
+      }
+
+      p img {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-wrap: none;
+        width: 200px;
+        height: auto;
+        object-fit: contain;
+      }
+      p,
+      h1 {
+        color: black;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 5px 15px;
+        border-radius: 10px;
+        background-color: bisque;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Batu Gunting Kertas</h1>
+    <div class="container">
+      <button onclick="playGame('batu')">
+        <img src="kepal.png" alt="Batu" />
+      </button>
+      <button onclick="playGame('gunting')">
+        <img src="dua jari.png" alt="Gunting" />
+      </button>
+      <button onclick="playGame('kertas')">
+        <img src="kertas.png" alt="Kertas" />
+      </button>
+      <p id="player-choice">Pilihan Pemain:</p>
+      <p id="computer-choice">Pilihan Komputer:</p>
+    </div>
+    <p id="result">Hasil:</p>
+    <p id="win">Wins</p>
+    <p id="los">Losses</p>
+    <p id="tie">Ties</p>
+    Wins: 47, Losses: 57, Ties: 57
+
+    <script>
+      let win = document.getElementById("win");
+      let los = document.getElementById("los");
+      let tie = document.getElementById("tie");
+      let w = 0;
+      let l = 0;
+      let t = 0;
+
+      function playGame(playerChoice) {
+        const choices = ["batu", "gunting", "kertas"];
+        const computerChoices = getRandomChoice(choices);
+
+        displayPlayerChoice(playerChoice);
+        displayComputerChoice(computerChoices);
+
+        const result = determineWinner(playerChoice, computerChoices);
+
+        document.getElementById("result").innerText = `Hasil: ${result}`;
+        win.innerText = `Wins: ${w}`;
+        los.innerText = `Losses: ${l}`;
+        tie.innerText = `Ties: ${t}`;
+      }
+
+      function getRandomChoice(choices) {
+        // Menghasilkan angka acak untuk memilih salah satu dari pilihan
+        const randomIndex = Math.floor(Math.random() * choices.length);
+        return choices[randomIndex];
+      }
+
+      function displayComputerChoice(computerChoice) {
+        const computerChoiceElement =
+          document.getElementById("computer-choice");
+        let computerImage = "";
+        if (computerChoice === "batu") {
+          computerImage = '<img src="kepal.png" alt="Batu" />';
+        } else if (computerChoice === "gunting") {
+          computerImage = '<img src="dua jari.png" alt="Gunting" />';
+        } else {
+          computerImage = '<img src="kertas.png" alt="Kertas" />';
+        }
+
+        computerChoiceElement.innerHTML = `${computerImage} Computer`;
+      }
+
+      function displayPlayerChoice(playerChoice) {
+        const playerChoiceElement = document.getElementById("player-choice");
+        let playerImage = "";
+        if (playerChoice === "batu") {
+          playerImage = '<img src="kepal.png" alt="Batu" />';
+        } else if (playerChoice === "gunting") {
+          playerImage = '<img src="dua jari.png" alt="Gunting" />';
+        } else {
+          playerImage = '<img src="kertas.png" alt="Kertas" />';
+        }
+
+        playerChoiceElement.innerHTML = `Pemain: ${playerImage}`;
+      }
+
+      function determineWinner(playerChoice, computerChoices) {
+        if (playerChoice === computerChoices) {
+          t++;
+          return "Seri!";
+        }
+
+        if (
+          (playerChoice === "batu" && computerChoices === "gunting") ||
+          (playerChoice === "kertas" && computerChoices === "batu") ||
+          (playerChoice === "gunting" && computerChoices === "kertas")
+        ) {
+          w++;
+          return "Pemain Menang!";
+        } else {
+          l++;
+          return "Computers Menang!";
+        }
+      }
+    </script>
+  </body>
+</html>
