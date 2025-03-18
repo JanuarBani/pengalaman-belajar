@@ -31,7 +31,7 @@ Welcome to the **Rock, Paper, Scissors** game. Play against the computer and see
 
 ### Game Screen
 
-![Game Screen](images/gambar.png)
+![Game Screen](images/Screenshot 2025-03-18 132355.png)
 
 ### Example:
 
@@ -44,7 +44,7 @@ Here’s how the images for **Rock**, **Paper**, and **Scissors** might look lik
 ![Paper Image](images/kertas.png)
 
 #### Scissors:
-![Scissors Image](images/dua_jari.png)
+![Scissors Image](images/dua jari.png)
 
 ---
 
